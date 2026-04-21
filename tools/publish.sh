@@ -5,13 +5,13 @@ set -euo pipefail
 show_help() {
   cat <<'EOF'
 Usage:
-  ./scripts/publish.sh [commit message] [--skip-build]
+  ./tools/publish.sh [commit message] [--skip-build]
 
 Examples:
-  ./scripts/publish.sh
-  ./scripts/publish.sh "add new robotics note"
-  ./scripts/publish.sh --skip-build
-  ./scripts/publish.sh "update blog" --skip-build
+  ./tools/publish.sh
+  ./tools/publish.sh "add new robotics note"
+  ./tools/publish.sh --skip-build
+  ./tools/publish.sh "update blog" --skip-build
 EOF
 }
 
