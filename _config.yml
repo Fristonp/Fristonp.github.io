@@ -1,12 +1,12 @@
 # Hexo site config
-title: Lin's Journal
-subtitle: 记录技术、阅读与日常观察
-description: 一个基于 Hexo 和 GitHub Pages 的个人博客
+title: Fristonp 的学习记录
+subtitle: 机器人方向专业学习记录
+description: 一个围绕机器人方向展开的专业学习与实践记录博客
 keywords:
   - blog
   - hexo
   - github-pages
-author: Your Name
+author: Fristonp
 language: zh-CN
 timezone: Asia/Shanghai
 
