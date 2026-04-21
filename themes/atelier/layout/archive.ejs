@@ -1,0 +1,18 @@
+<%
+const posts = page.posts && typeof page.posts.toArray === 'function' ? page.posts.toArray() : [];
+const heading = page.title || '文章归档';
+%>
+
+<section class="panel reveal">
+  <div class="section-head section-head-stack">
+    <div>
+      <p class="eyebrow">Archive</p>
+      <h1 class="archive-title"><%= heading %></h1>
+    </div>
+    <p class="archive-summary">这里按时间、分类或标签浏览文章。</p>
+  </div>
+
+  <%- partial('partials/archive-list', { posts: posts }) %>
+
+  <%- partial('partials/pagination') %>
+</section>

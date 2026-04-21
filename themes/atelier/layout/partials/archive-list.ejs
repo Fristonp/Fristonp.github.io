@@ -1,0 +1,19 @@
+<%
+function summaryOf(post) {
+  const plain = strip_html((post.excerpt || post.content || '')).replace(/\s+/g, ' ').trim();
+  return post.description || plain.slice(0, 110) + (plain.length > 110 ? '...' : '');
+}
+%>
+
+<div class="archive-list">
+  <% posts.forEach((post) => { %>
+    <article class="archive-item">
+      <div class="meta-row">
+        <span><%= date(post.date, 'YYYY.MM.DD') %></span>
+        <span><%= post.categories && post.categories.length ? post.categories.first().name : '未分类' %></span>
+      </div>
+      <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+      <p><%= summaryOf(post) %></p>
+    </article>
+  <% }) %>
+</div>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= page.title ? `${page.title} | ${config.title}` : config.title %></title>
+  <meta name="description" content="<%= page.description || config.description %>">
+  <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="<%- url_for('/') %>">
+        <span class="brand-mark">LJ</span>
+        <span class="brand-copy">
+          <strong><%= config.title %></strong>
+          <small><%= config.subtitle %></small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        菜单
+      </button>
+
+      <nav id="site-nav" class="site-nav">
+        <% for (const label in theme.menu) { %>
+          <a href="<%- url_for(theme.menu[label]) %>"><%= label %></a>
+        <% } %>
+      </nav>
+    </header>
+
+    <main class="site-main">
+      <%- body %>
+    </main>
+
+    <footer class="site-footer">
+      <p><%= config.title %></p>
+      <p><%= theme.footer.motto %></p>
+    </footer>
+  </div>
+
+  <script src="<%- url_for('/js/site.js') %>"></script>
+</body>
+</html>

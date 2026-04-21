@@ -1,0 +1,14 @@
+menu:
+  首页: /
+  归档: /archives/
+  关于: /about/
+hero:
+  eyebrow: Personal Blog / Notes / Essays
+  title: 把技术、阅读和生活片段，整理成值得回看的文字。
+  description: 这是一个偏编辑部气质的个人博客主题，适合长期更新文章，而不是只放一个默认模板首页。
+  note_title: 写作状态
+  note_text: 慢慢写，认真发。把想法整理成能重复阅读的东西。
+  cta_primary: 查看文章
+  cta_secondary: 了解我
+footer:
+  motto: Write slowly. Publish clearly.

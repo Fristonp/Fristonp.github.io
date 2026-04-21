@@ -1,0 +1,45 @@
+<article class="panel article-shell reveal">
+  <a class="back-link" href="<%- url_for('/') %>">返回首页</a>
+  <p class="eyebrow"><%= page.categories && page.categories.length ? page.categories.first().name : '文章' %></p>
+  <h1 class="article-title"><%= page.title %></h1>
+
+  <div class="meta-row article-meta">
+    <span><%= date(page.date, 'YYYY.MM.DD') %></span>
+    <% if (page.updated) { %>
+      <span>更新于 <%= date(page.updated, 'YYYY.MM.DD') %></span>
+    <% } %>
+  </div>
+
+  <% if (page.description) { %>
+    <p class="article-description"><%= page.description %></p>
+  <% } %>
+
+  <div class="article-content">
+    <%- page.content %>
+  </div>
+
+  <% if ((page.tags && page.tags.length) || (page.categories && page.categories.length)) { %>
+    <div class="article-taxonomy">
+      <% if (page.categories && page.categories.length) { %>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">分类</span>
+          <div class="taxonomy-links">
+            <% page.categories.each((category) => { %>
+              <a href="<%- url_for(category.path) %>"><%= category.name %></a>
+            <% }) %>
+          </div>
+        </div>
+      <% } %>
+      <% if (page.tags && page.tags.length) { %>
+        <div class="taxonomy-row">
+          <span class="taxonomy-label">标签</span>
+          <div class="taxonomy-links">
+            <% page.tags.each((tag) => { %>
+              <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+            <% }) %>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</article>

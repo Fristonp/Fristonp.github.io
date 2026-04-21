@@ -1,0 +1,16 @@
+<%
+const posts = page.posts && typeof page.posts.toArray === 'function' ? page.posts.toArray() : [];
+%>
+
+<section class="panel reveal">
+  <div class="section-head section-head-stack">
+    <div>
+      <p class="eyebrow">Category</p>
+      <h1 class="archive-title"><%= page.title || '分类' %></h1>
+    </div>
+    <p class="archive-summary">按当前分类浏览相关文章。</p>
+  </div>
+
+  <%- partial('partials/archive-list', { posts: posts }) %>
+  <%- partial('partials/pagination') %>
+</section>
