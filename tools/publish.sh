@@ -42,15 +42,34 @@ repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
 branch="$(git rev-parse --abbrev-ref HEAD)"
+origin_url="$(git remote get-url origin 2>/dev/null || true)"
 
 if [[ "$branch" == "HEAD" ]]; then
   printf 'Error: detached HEAD is not supported.\n' >&2
   exit 1
 fi
 
-if ! git remote get-url origin >/dev/null 2>&1; then
+if [[ -z "$origin_url" ]]; then
   printf 'Error: git remote "origin" is not configured.\n' >&2
   exit 1
+fi
+
+git_push_cmd=(git push origin "$branch")
+
+if [[ "$origin_url" == git@* || "$origin_url" == ssh://* ]]; then
+  printf '[0/5] Checking SSH access to origin...\n'
+  if ! GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10" git ls-remote origin HEAD >/dev/null 2>&1; then
+    printf 'Error: SSH access to origin failed. Run `ssh -T git@github.com` to verify your GitHub SSH setup.\n' >&2
+    exit 1
+  fi
+  git_push_cmd=(env GIT_SSH_COMMAND="ssh -o BatchMode=yes -o ConnectTimeout=10" git push origin "$branch")
+else
+  printf '[0/5] Checking HTTPS access to origin...\n'
+  if ! GIT_TERMINAL_PROMPT=0 git ls-remote origin HEAD >/dev/null 2>&1; then
+    printf 'Error: HTTPS access to origin failed. Configure GitHub credentials or switch the remote to SSH.\n' >&2
+    exit 1
+  fi
+  git_push_cmd=(env GIT_TERMINAL_PROMPT=0 git push origin "$branch")
 fi
 
 if [[ "$skip_build" != "true" ]]; then
@@ -69,7 +88,7 @@ if git diff --cached --quiet; then
 fi
 
 printf '[3/5] Files to be committed:\n'
-git diff --cached --name-status
+git --no-pager diff --cached --name-status
 
 if [[ -z "$commit_message" ]]; then
   commit_message="update blog $(date '+%Y-%m-%d %H:%M:%S')"
@@ -79,6 +98,6 @@ printf '[4/5] Creating commit...\n'
 git commit -m "$commit_message"
 
 printf '[5/5] Pushing to origin/%s...\n' "$branch"
-git push origin "$branch"
+"${git_push_cmd[@]}"
 
 printf 'Done.\n'
