@@ -54,13 +54,13 @@ if ! git remote get-url origin >/dev/null 2>&1; then
 fi
 
 if [[ "$skip_build" != "true" ]]; then
-  printf '[1/4] Building site...\n'
+  printf '[1/5] Building site...\n'
   npm run build
 else
-  printf '[1/4] Skipping build.\n'
+  printf '[1/5] Skipping build.\n'
 fi
 
-printf '[2/4] Staging changes...\n'
+printf '[2/5] Staging changes...\n'
 git add -A
 
 if git diff --cached --quiet; then
@@ -68,14 +68,17 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
+printf '[3/5] Files to be committed:\n'
+git diff --cached --name-status
+
 if [[ -z "$commit_message" ]]; then
   commit_message="update blog $(date '+%Y-%m-%d %H:%M:%S')"
 fi
 
-printf '[3/4] Creating commit...\n'
+printf '[4/5] Creating commit...\n'
 git commit -m "$commit_message"
 
-printf '[4/4] Pushing to origin/%s...\n' "$branch"
+printf '[5/5] Pushing to origin/%s...\n' "$branch"
 git push origin "$branch"
 
 printf 'Done.\n'
