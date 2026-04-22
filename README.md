@@ -332,3 +332,95 @@ git push
 - 线上地址固定为 `https://Fristonp.github.io`
 - 关于页文件在 `source/about/index.md`
 - 文章文件都在 `source/_posts/`
+
+## 15. 如何删除文档（详细）
+
+这里的“文档”主要分两类：
+
+- 文章：`source/_posts/*.md`
+- 页面：例如 `source/about/index.md`
+
+### 15.1 删除一篇文章
+
+1. 先确认文件名：
+
+```bash
+ls source/_posts
+```
+
+2. 删除目标文章（示例）：
+
+```bash
+git rm "source/_posts/hello-hexo.md"
+```
+
+3. 本地构建确认无报错：
+
+```bash
+npm run build
+```
+
+4. 提交并发布：
+
+```bash
+git commit -m "delete post: hello-hexo"
+git push
+```
+
+### 15.2 删除一个页面（例如关于页）
+
+删除文件：
+
+```bash
+git rm "source/about/index.md"
+```
+
+然后构建检查：
+
+```bash
+npm run build
+```
+
+如果构建正常，再 `git commit` + `git push`。
+
+### 15.3 一次删除多篇文章
+
+建议先看清楚再删：
+
+```bash
+ls source/_posts
+git rm source/_posts/文章1.md source/_posts/文章2.md
+npm run build
+git commit -m "delete selected posts"
+git push
+```
+
+### 15.4 误删后的恢复方法
+
+如果文件还没提交，可以恢复工作区：
+
+```bash
+git restore source/_posts source/about
+```
+
+如果已经提交了删除，按提交号恢复单个文件（示例）：
+
+```bash
+git checkout <commit_id> -- source/_posts/hello-hexo.md
+```
+
+### 15.5 避免 `File not found` 的关键检查
+
+删除文档后，一定执行：
+
+```bash
+npm run build
+```
+
+确认日志里不是 `0 files generated`，并且 `public/index.html` 存在：
+
+```bash
+test -f public/index.html && echo "index ok" || echo "index missing"
+```
+
+如果 `index missing`，不要发布，先恢复至少一个页面或文章再构建。
