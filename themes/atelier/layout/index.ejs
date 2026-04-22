@@ -11,7 +11,9 @@ function summaryOf(post) {
 
 <section class="hero panel reveal">
   <div class="hero-copy">
-    <p class="eyebrow"><%= theme.hero.eyebrow %></p>
+    <% if (theme.hero.eyebrow) { %>
+      <p class="eyebrow"><%= theme.hero.eyebrow %></p>
+    <% } %>
     <h1><%= theme.hero.title %></h1>
     <p class="hero-text"><%= theme.hero.description %></p>
 
