@@ -75,6 +75,10 @@ fi
 if [[ "$skip_build" != "true" ]]; then
   printf '[1/5] Building site...\n'
   npm run build
+  if [[ ! -f "public/index.html" ]]; then
+    printf 'Error: build finished but public/index.html was not generated. Aborting publish.\n' >&2
+    exit 1
+  fi
 else
   printf '[1/5] Skipping build.\n'
 fi
