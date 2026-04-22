@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= page.title ? `${page.title} | ${config.title}` : config.title %></title>
   <meta name="description" content="<%= page.description || config.description %>">
-  <link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+  <link rel="stylesheet" href="<%- versioned_asset('/css/style.css') %>">
 </head>
 <body>
   <div class="page-shell">
@@ -44,6 +44,6 @@
     </footer>
   </div>
 
-  <script src="<%- url_for('/js/site.js') %>"></script>
+  <script src="<%- versioned_asset('/js/site.js') %>"></script>
 </body>
 </html>
