@@ -34,8 +34,13 @@
     </main>
 
     <footer class="site-footer">
-      <p><%= config.title %></p>
-      <p><%= theme.footer.motto %></p>
+      <div class="footer-copy">
+        <p><%= config.title %></p>
+        <p><%= theme.footer.motto %></p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="<%- url_for(theme.footer.rss_path || '/atom.xml') %>"><%= theme.footer.rss_label || 'RSS 订阅' %></a>
+      </div>
     </footer>
   </div>
 

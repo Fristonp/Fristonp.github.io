@@ -57,6 +57,46 @@ date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 updated_option: 'mtime'
 
+# Feed
+feed:
+  enable: true
+  type:
+    - atom
+    - rss2
+  path:
+    - atom.xml
+    - rss2.xml
+  limit: 20
+  content: false
+  content_limit: 140
+  content_limit_delim: ' '
+  autodiscovery: true
+
+# Sitemap
+sitemap:
+  path:
+    - sitemap.xml
+    - sitemap.txt
+  rel: true
+  tags: true
+  categories: true
+
+# Markdown
+markdown:
+  preset: default
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+  anchors:
+    level: 2
+  images:
+    lazyload: false
+    prepend_root: false
+    post_asset: false
+
 # Theme
 theme: atelier
 

@@ -12,3 +12,5 @@ hero:
   cta_secondary: 关于我
 footer:
   motto: 持续学习，持续记录。
+  rss_label: RSS 订阅
+  rss_path: /atom.xml
