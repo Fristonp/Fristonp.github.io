@@ -517,6 +517,12 @@ h4 {
   transform: translateY(0);
 }
 
+/* 文章页和页面（如关于页）内容始终可见，不依赖 JS 动画 */
+.article-shell.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 920px) {
   .hero,
   .post-grid,
