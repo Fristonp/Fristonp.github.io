@@ -47,7 +47,7 @@ future: true
 index_generator:
   path: ''
   per_page: 5
-  order_by: -date
+  order_by: -updated
 
 default_category: uncategorized
 category_map:

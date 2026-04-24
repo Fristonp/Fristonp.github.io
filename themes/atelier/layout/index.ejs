@@ -2,7 +2,7 @@
 const posts = page.posts && typeof page.posts.toArray === 'function' ? page.posts.toArray() : [];
 const featured = posts[0];
 const recent = featured ? posts.slice(1) : posts;
-const latest = site.posts && site.posts.length ? site.posts.sort('-date').toArray()[0] : null;
+const latest = site.posts && site.posts.length ? site.posts.sort('-updated').toArray()[0] : null;
 function summaryOf(post) {
   const plain = strip_html((post.excerpt || post.content || '')).replace(/\s+/g, ' ').trim();
   return post.description || plain.slice(0, 110) + (plain.length > 110 ? '...' : '');
