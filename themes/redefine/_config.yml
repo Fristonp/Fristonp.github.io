@@ -11,11 +11,11 @@
 # Docs: https://redefine-docs.ohevan.com/basic/info
 info:
   # Site title
-  title: Theme Redefine
+  title: friston's blog
   # Site subtitle
-  subtitle: Redefine Your Hexo Journey.
+  subtitle: Redefine Your Journey.
   # Author name
-  author: The Redefine Team
+  author: friston
   # Site URL
   url: https://redefine.ohevan.com
 # BASIC INFORMATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
