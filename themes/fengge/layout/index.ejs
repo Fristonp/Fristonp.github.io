@@ -1,0 +1,35 @@
+<section class="hero">
+  <h1 class="hero-title"><%= theme.hero.title %></h1>
+  <p class="hero-desc"><%= theme.hero.description %></p>
+</section>
+
+<section class="post-list">
+  <%
+    var posts = page.posts;
+    if (posts && typeof posts.toArray === 'function') {
+      posts = posts.toArray();
+    } else {
+      posts = [];
+    }
+  %>
+
+  <% posts.forEach(function(post) { %>
+  <article class="post-item">
+    <time class="post-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+      <%= date(post.date, 'YYYY.MM.DD') %>
+    </time>
+    <h2 class="post-title">
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </h2>
+    <% if (theme.index.show_excerpt && post.excerpt) { %>
+    <p class="post-excerpt"><%- strip_html(post.excerpt).substring(0, theme.index.excerpt_length) %></p>
+    <% } else if (theme.index.show_excerpt && post.content) { %>
+    <p class="post-excerpt"><%- strip_html(post.content).substring(0, theme.index.excerpt_length) %>...</p>
+    <% } %>
+  </article>
+  <% }) %>
+</section>
+
+<% if (page.total > 1) { %>
+<%- partial('partials/pagination') %>
+<% } %>

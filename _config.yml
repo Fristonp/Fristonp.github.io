@@ -98,7 +98,7 @@ markdown:
     post_asset: false
 
 # Theme
-theme: atelier
+theme: redefine
 
 # Deployment
 # 当前推荐使用 GitHub Actions 发布到 GitHub Pages，

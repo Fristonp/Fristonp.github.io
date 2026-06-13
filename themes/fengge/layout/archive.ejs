@@ -1,0 +1,32 @@
+<section class="archive">
+  <h1 class="archive-title">归档</h1>
+
+  <%
+    var posts = page.posts;
+    if (posts && typeof posts.toArray === 'function') {
+      posts = posts.toArray();
+    } else {
+      posts = [];
+    }
+
+    var currentYear = '';
+  %>
+
+  <% posts.forEach(function(post) { %>
+    <% var year = date(post.date, 'YYYY'); %>
+    <% if (year !== currentYear) { %>
+      <% currentYear = year; %>
+      <h2 class="archive-year"><%= year %></h2>
+    <% } %>
+    <div class="archive-item">
+      <time datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+        <%= date(post.date, 'MM.DD') %>
+      </time>
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </div>
+  <% }) %>
+</section>
+
+<% if (page.total > 1) { %>
+<%- partial('partials/pagination') %>
+<% } %>

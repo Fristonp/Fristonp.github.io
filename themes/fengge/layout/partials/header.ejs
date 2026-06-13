@@ -1,0 +1,21 @@
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="<%- url_for('/') %>" class="site-logo"><%= config.title %></a>
+
+    <button class="nav-toggle" aria-label="菜单" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links">
+      <% for (var name in theme.menu) { %>
+      <li>
+        <a href="<%- url_for(theme.menu[name]) %>"
+           class="<%= is_current(theme.menu[name]) ? 'active' : '' %>">
+          <%= name %>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
